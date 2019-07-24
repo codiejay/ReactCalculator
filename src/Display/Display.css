@@ -1,0 +1,13 @@
+#display{
+     text-align: right;
+     background-color: #F1F3F4;
+     color: rgba(22, 22, 22, 0.726);
+     padding: 20px 8px;
+     font-size: 13px;;
+     margin-bottom: 3em;
+}
+
+#display b{
+     font-size: 1.3em
+}
+

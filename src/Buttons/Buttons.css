@@ -1,0 +1,33 @@
+#key{
+    display: grid;
+    grid-template-columns: repeat(4, 23.6%);
+    grid-column-gap: 0.6em;
+    text-align: right;
+    margin: 0;
+
+    
+}
+
+#keys{
+    text-align: right;
+    width: 90%;
+    margin: auto;
+}
+
+#key h1{
+    padding: 9px 8px;
+    background-color: rgb(241, 241, 241);
+    text-align: center;
+    border-radius: 7px;
+    cursor: pointer;
+
+}
+
+#key .blue{
+    background-color: rgba(0, 0, 255, 0.699);
+    color: white;
+}
+
+#key .grey{
+    background-color: rgb(216, 216, 216);
+}
