@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Display from "./Display/Display"
-import Button from "./Buttons/Button"
+// import Display from "./Display/Display"
+import { Button } from "./Buttons/Button"
 
 
-function App() {
-
-    return (
-   <div className="calc">
-     <Display />
-    <Button />
-   </div>
-  )
+const App = () => {
 
   
-}
+
+  
+    return(
+
+    <div className="calc">
+     <Button />
+    </div>
+    
+   )
+ 
+  
+    
+    }
 
 
 
 export default App;
+
+    
+
