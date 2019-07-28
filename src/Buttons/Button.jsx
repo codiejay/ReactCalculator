@@ -5,78 +5,126 @@ import Display from "../Display/Display"
 
 
 export const Button = (props) => {
-    // Calculation Data
-    let firstDigits;
+    // Calculation Data;
+  
     let keys   = ["(", ")", "%", "AC",  7, 8, 9, "/", 4, 5, 6, "x", 1, 2, 3 ,"-", 0, ".", "=", "+" ];
-    
-   
-    
-
-      const [calculation, setCalculation] = useState( {
-          calValue: "",
-          calAction: ""
-      } )
-
-      const handleCalculation = (e) => {
-        setCalculation({
-            calValue: calculation.calValue += e.target.classList[0],
-          })
-      }
-
-      const calFunction = (e) => {
-        firstDigits = calculation.calValue;
-        
-        setCalculation({
-            calValue: calculation.calValue += e.target.innerHTML,
-            calAction: e.target.innerHTML
-            
-        })
-
-        
-      }
-
-      const equalSignHandler = (e) => {
-        console.log(calculation.calAction);
-     
-      }
-     
-      
- 
   
 
+    let [currentState, setCurrentState] = useState({ 
+        screeDisplay: "",
+        firstFigure: "",
+        secondFigure: "",
+        operator: "",
+        falseMove: 0,
+        bigNum: ""
+        
+    })
+
+    const equalsTo = (e) => {
+        console.log(currentState.firstFigure + " " + currentState.bigNum);
+
+        setCurrentState( {
+            screeDisplay: parseInt(currentState.firstFigure) + parseInt(currentState.bigNum),
+            firstFigure: "",
+            secondFigure: "",
+            operator: "",
+            falseMove: currentState.falseMove += 1,
+            bigNum: currentState.firstFigure,
+
+        } )
+    }
+
+    const operators = (e) => {
+       
+       
+        setCurrentState( {
+            screeDisplay: currentState.screeDisplay += e.target.innerHTML,
+            firstFigure: "",
+            secondFigure: "",
+            operator: "",
+            falseMove: currentState.falseMove += 1,
+            bigNum: currentState.firstFigure,
+
+        } )
+
+       
+    }
+
+    const getNumbers = (e) => {
+
+
+        if(currentState.falseMove === 1){
+        setCurrentState ( {
+            screeDisplay:  currentState.screeDisplay += e.target.innerHTML,
+            firstFigure: currentState.firstFigure += e.target.innerHTML,
+            secondFigure: "",
+            operator: "",
+            falseMove: currentState.falseMove,
+            bigNum: currentState.bigNum
+        
+        } )
+
+    }
+
+    else if(currentState.falseMove === 0){
+        setCurrentState ( {
+            screeDisplay:  currentState.screeDisplay += e.target.innerHTML,
+            firstFigure: currentState.firstFigure += e.target.innerHTML,
+            secondFigure: "",
+            operator: "",
+            falseMove: currentState.falseMove,
+            bigNum: currentState.bigNum
+        
+        } )
+
+    }
+
+       
+    }
+   
     return (
         
         <div id="keys">
-        < Display calculation={calculation.calValue} />
+        < Display calculation={currentState.screeDisplay}  />
 
             <div id="key">
             {
             keys.map(i => {
+
                 if(i === "="){
-                    return <h1 onClick={equalSignHandler()}  className="blue" key={i}>{i}</h1>
+                    {/* THE EQUALS TO SIGN */}
+                    return <h1 onClick= {equalsTo}   className="blue" key={i}>{i}</h1>
 
                 }
 
+
+                
                 else if( 
-                    i === "=" ||
-                    i === "(" ||
-                    i === ")" || 
-                    i === "%" ||
                     i === "/" || 
                     i === "x" ||
                     i === "-" ||
-                    i === "." ||
                     i === "+"){
-                    return <h1 onClick={calFunction} className="grey" key={i}>{i}</h1>
+                        {/* THE OPERATORS */}
+                    return <h1 onClick= {operators} className="grey" key={i}>{i}</h1>
                 }
                 
 
                 else if(i === "AC"){
+                    {/* CLEAR THE SCREEN BUTTON */}
                     return <h1  className="grey" id="clear" key={i}>{i}</h1>
                 }
 
+                else if(
+                    i === ")" || 
+                    i === "(" ||
+                    i === "%" ||
+                    i === "."){
+                        return <h1  className="grey" key={i}>{i}</h1>
+                    }
+
                 else{
-                    return <h1 onClick= {handleCalculation} className={i} id="btn"  key={i}>{i}</h1>
+
+                    return <h1 onClick= {getNumbers}  className={i} id="btn"  key={i}>{i}</h1>
                 }
             
             })}

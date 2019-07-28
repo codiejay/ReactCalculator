@@ -6,7 +6,6 @@ const Display = (props) => {
         <div id="display">
             <b id="results"> {props.result} </b>
             <h1 id="calculations">{props.calculation}</h1>
-
         </div>
     )
 }
